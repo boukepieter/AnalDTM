@@ -16,14 +16,14 @@ z <- 1.4 + 0.1*x + 0.2*y + 0.002*x*x
 pols <- SpatialPolygonsDataFrame(polys,
                                  data=data.frame(x=x, y=y, z=z, row.names=row.names(polys)))
 
-test_that("testing valid input", {
+test_that("input is valid", {
   expect_error(spatial.join.locs(pts,pols), "Points must be of class SpatialPointsDataFrame")
   expect_error(spatial.join.locs(points,polys), "Points must be of class SpatialPolygonsDataFrame")
   expect_error(spatial.join.locs(points,pols), "CRS of both the points as the area has to be known")
 })
 projection(points) <- get.wgs84()
 projection(pols) <- get.wgs84()
-test_that("testing right output",{
+test_that("output is as expected",{
   expect_equal(names(spatial.join.locs(points, pols, "z", "test"))[2],"test")
   expect_equal(spatial.join.locs(points, pols, "z", "test")@data[3, 2],2.518)
 })
