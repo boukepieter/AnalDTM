@@ -1,5 +1,9 @@
 read.DTM <- function(file, sheet, columns){
-  data <- read.xlsx(paste("input/",file,sep=""),sheetName=sheet, startRow=1, colIndex=1:columns)
+  if (!requireNamespace("xlsx", quietly = TRUE)) {
+    stop("Package \"xlsx\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+  data <- xlsx::read.xlsx(paste("input/",file,sep=""),sheetName=sheet, startRow=1, colIndex=1:columns)
   data <- data[-nrow(data),]
   i <- sapply(data, is.factor)
   data[i] <- lapply(data[i], as.character)

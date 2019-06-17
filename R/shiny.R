@@ -13,8 +13,8 @@ library(leaflet)
 library(htmlwidgets)
 library(rgeos)
 library(plotly)
-source("functions.R")
-source("functions_shiny.R")
+#source("functions.R")
+#source("functions_shiny.R")
 
 ui <- fluidPage( 
   tags$style(type = "text/css", 

@@ -1,11 +1,32 @@
 Package: analDTM
 Type: Package
-Title: Providing some specific analyzing functions for IOM DTM database
-Version: 0.1.0
-Author: Bouke Pieter Ottow
+Title: Providing Some Specific Analyzing Functions For The IOM DTM Database
+Version: 0.0.0.9000
+Authors@R: person("Bouke Pieter", "Ottow", email = "boukepieter@gmail.com",
+  role = c("aut", "cre"))
 Maintainer: Bouke Pieter Ottow <bouke.pieter-ottow@reach-initiative.org>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Description: Providing Some Specific Analyzing Functions For The IOM DTM Database. Taking the IOM DTM database
+    as start and perform some analysis, mainly calculating changes between different rounds and disaggregating
+    to different administrative levels. It also provides a shiny dashboard and outputs with plotly and leaflet.
+License: GPLv3
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/boukepieter/AnalDTM
+BugReports: https://github.com/boukepieter/AnalDTM/issues
+Imports: 
+    dplyr (>= 0.8.1),
+    ggplot2 (>= 3.1.1),
+    plyr (>= 1.8.4),
+    raster (>= 2.8-19),
+    rgdal (>= 1.4-3),
+    rgeos (>= 0.4-2),
+    sp (>= 1.3-1)
+Suggests:
+    shiny,
+    plotly,
+    xlsx,
+    rjava,
+    plotKML,
+    leaflet,
+    htmlwidgets,
+    testthat
