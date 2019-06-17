@@ -1,0 +1,11 @@
+Package: analDTM
+Type: Package
+Title: Providing some specific analyzing functions for IOM DTM database
+Version: 0.1.0
+Author: Bouke Pieter Ottow
+Maintainer: Bouke Pieter Ottow <bouke.pieter-ottow@reach-initiative.org>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
