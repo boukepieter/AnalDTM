@@ -102,7 +102,7 @@ server <- function(input, output){
       
       ##### DISTRICT LEVEL ANALYSIS #####
       district_shapes <- readOGR("IAU_DIBs_SubDistricts/districts.shp","districts")
-      projection(district_shapes) <- WGS84
+      projection(district_shapes) <- get.wgs84()
       
       result_district <- DTM.area.analysis.shiny(target, bline, district_shapes, sumname="A2NameEn",date, target_file, 
                                                      bline.is.dbase=compareWithDatabase)
@@ -111,7 +111,7 @@ server <- function(input, output){
       ##### SUB-DISTRICT LEVEL ANALYSIS #####
       # load in shapes
       subdistricts <- readOGR("IAU_DIBs_SubDistricts/irq_polbnda_adm3_500k_UNAMI_PA.shp","irq_polbnda_adm3_500k_UNAMI_PA")
-      projection(subdistricts) <- WGS84
+      projection(subdistricts) <- get.wgs84()
       
       result_subdistrict <- DTM.area.analysis.shiny(target, bline, subdistricts, sumname="ADM3_Eng_n",date, target_file, 
                                                      bline.is.dbase=compareWithDatabase) 

@@ -1,5 +1,6 @@
-# Common variables
-WGS84 <- crs("+init=epsg:4326")
+get.wgs84 <- function(){
+  crs("+init=epsg:4326")
+} 
 
 spatial.join.locs <- function(points, shapes, targetcolumn, column.names){
   if (!class(points)=="SpatialPointsDataFrame"){stop("Points must be of class SpatialPointsDataFrame")}
@@ -13,7 +14,7 @@ spatial.join.locs <- function(points, shapes, targetcolumn, column.names){
 }
 
 DTM.extract.area <- function(dataset, areas) {
-  ds_spdf <- SpatialPointsDataFrame(dataset[,c("Longitude","Latitude")],dataset,proj4string=WGS84)
+  ds_spdf <- SpatialPointsDataFrame(dataset[,c("Longitude","Latitude")],dataset,proj4string=get.wgs84())
   ds_area <- over(ds_spdf,areas)[,2]
   ds_area
 }

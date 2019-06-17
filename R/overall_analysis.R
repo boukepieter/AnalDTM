@@ -17,7 +17,7 @@ DTM.point.analysis <- function(target, dbase, outputfolder, date, target_file, d
   name_col <- grep("name",names(anal_table), ignore.case=T)[1]
   anal_table[,name_col] <- gsub("&","",anal_table[,name_col])
   anal_spdf <- SpatialPointsDataFrame(anal_table[which(anal_table[,ncol(anal_table)]!=0),c("Longitude","Latitude")],
-                                      anal_table[which(anal_table[,ncol(anal_table)]!=0),],proj4string=WGS84)
+                                      anal_table[which(anal_table[,ncol(anal_table)]!=0),],proj4string=get.wgs84())
   plotKML(anal_spdf[,ncol(anal_table)], open.kml=F, plot.labpt=T,
           file.name=sprintf("%s/%s/analysis_location_%s.kml",outputfolder,
                             date,substr(target_file,1,nchar(target_file)-5)),

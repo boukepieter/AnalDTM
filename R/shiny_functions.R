@@ -7,7 +7,7 @@ DTM.area.analysis.shiny <- function(target, dbase, shapes, sumname, date, target
   } else { blined <- dbase}
   
   blined$District <- spatial.join.locs(SpatialPointsDataFrame(blined[,c("Longitude","Latitude")], 
-                                                              blined, proj4string=WGS84), shapes,
+                                                              blined, proj4string=get.wgs84()), shapes,
                                        sumname,"join")$join
   # summarize per district
   if (bline.is.dbase){
@@ -17,7 +17,7 @@ DTM.area.analysis.shiny <- function(target, dbase, shapes, sumname, date, target
   } else { 
     sums <- names(blined)[ncol(blined)]
     target$District <- spatial.join.locs(SpatialPointsDataFrame(target[,c("Longitude","Latitude")], 
-                                                                target, proj4string=WGS84), shapes,
+                                                                target, proj4string=get.wgs84()), shapes,
                                          sumname,"join")$join
     target_district <- ddply(target, "District", summarise, 
                              sum_values=sum(!!sym(names(target)[grep("Families",names(blined))]),na.rm=T))
@@ -49,7 +49,7 @@ DTM.area.analysis.shiny <- function(target, dbase, shapes, sumname, date, target
   graphs <- list()
   if(bline.is.dbase){
     dbase$District <- spatial.join.locs(SpatialPointsDataFrame(dbase[,c("Longitude","Latitude")], 
-                                                               dbase, proj4string=WGS84), shapes,
+                                                               dbase, proj4string=get.wgs84()), shapes,
                                         sumname,"join")$join
     summarised <- summarize.returnees(dbase[,c(grep("District",names(dbase)),
                                                grep("families",names(dbase),ignore.case=T)[1]:ncol(dbase))], District)
@@ -120,7 +120,7 @@ DTM.point.analysis.shiny <- function(target, dbase, date, target_file, databasef
   name_col <- grep("name",names(anal_table), ignore.case=T)[1]
   anal_table[,name_col] <- gsub("&","",anal_table[,name_col])
   anal_spdf <- SpatialPointsDataFrame(anal_table[,c("Longitude","Latitude")],
-                                      anal_table,proj4string=WGS84)
+                                      anal_table,proj4string=get.wgs84())
   lbls <- paste(anal_spdf@data[,name_col],anal_spdf@data[,(ncol(anal_table)-1)],
                 paste(anal_spdf@data[,ncol(anal_table)],"%",sep=""),sep=", ")
   url <- "https://api.mapbox.com/v3/mapbox.iraq/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYm91a2VwaWV0ZXJvdHRvdyIsImEiOiJjanZrem82ZnAwdTliNDRtbDljdHptaXpkIn0.vlYoVkiHTdvkHONpNqy_Sg"
