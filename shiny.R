@@ -1,4 +1,4 @@
-setwd("c:/Users/REACH-IRQ-GIS/Documents/201904 DTM Analysis automatisation")
+setwd("c:/Users/REACH-IRQ-GIS/Documents/Impact R packages/AnalDTM")
 library(shiny)
 library(xlsx)
 library(spatial)

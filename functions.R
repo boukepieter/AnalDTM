@@ -2,11 +2,15 @@
 WGS84 <- crs("+init=epsg:4326")
 
 get.newcols <- function(date){
+  if (!class(date)=="Date"){stop("give a 'Date' as input")}
   c(paste("families_abs",date,sep="_"),paste("families_diff_abs",date,sep="_"),
     paste("families_diff_perc",date,sep="_"))
 }
 
 spatial.join.locs <- function(points, shapes, targetcolumn, column.names){
+  if (!class(points)=="SpatialPointsDataFrame"){stop("Points must be of class SpatialPointsDataFrame")}
+  if (!class(shapes)=="SpatialPolygonsDataFrame"){stop("Points must be of class SpatialPolygonsDataFrame")}
+  if (is.na(crs(points)) | is.na(crs(shapes))){stop("CRS of both the points as the area has to be known")}
   shapes <- spTransform(shapes, crs(points))
   for (i in 1:length(targetcolumn)){
     points@data[,column.names[i]] <- over(points, shapes)[,targetcolumn[i]]
@@ -15,6 +19,7 @@ spatial.join.locs <- function(points, shapes, targetcolumn, column.names){
 }
 
 compareReturnees <- function(blineVec,targetVec){
+  if (ncol(blineVec)!=2 | ncol(targetVec) != 2){stop("Input must have 2 columns exactly")}
   result <- targetVec
   result[which(targetVec[,1] %in% blineVec[,1] == TRUE),"diff"] <- 
     targetVec[which(targetVec[,1] %in% blineVec[,1] == TRUE),2] - 
